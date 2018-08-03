@@ -19,9 +19,10 @@ branches:
     - master
     - 5.0-dev
 
-matrix:
-  - PARASPEC=1
-  - PARASPEC=0
+env:
+  matrix:
+    - PARASPEC=1
+    - PARASPEC=0
 
 script: |
   set -e
