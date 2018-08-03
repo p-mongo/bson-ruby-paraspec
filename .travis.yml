@@ -21,3 +21,15 @@ branches:
 
 matrix:
   - PARASPEC=1
+  - PARASPEC=0
+
+script: |
+  set -e
+  if test $PARASPEC = 1; then
+    rake compile
+    git clone https://github.com/paraspec/paraspec $HOME/paraspec
+    $HOME/paraspec/bin/paraspec -c 2
+  else
+    rake compile
+    rake rspec
+  fi
