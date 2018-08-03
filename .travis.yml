@@ -4,14 +4,10 @@ sudo: false
 
 before_install:
   - gem install bundler
+  - gem install paraspec
 
 rvm:
-  - 1.9.3
-  - 2.4.2
   - 2.5
-  - ruby-head
-  - jruby-19mode
-  - jruby-9.1.15.0
 
 env: CI="travis"
 
@@ -24,6 +20,18 @@ branches:
     - master
     - 5.0-dev
 
-matrix:
-  allow_failures:
-    - rvm: ruby-head
+env:
+  matrix:
+    - PARASPEC=1
+    - PARASPEC=0
+
+script: |
+  set -e
+  if test $PARASPEC = 1; then
+    rake compile
+    git clone https://github.com/paraspec/paraspec $HOME/paraspec
+    $HOME/paraspec/bin/paraspec -c 2
+  else
+    rake compile
+    rake rspec
+  fi
