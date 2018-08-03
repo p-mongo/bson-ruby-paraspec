@@ -23,4 +23,6 @@ group :development, :test do
   else
     gem 'pry'
   end
+  
+  gem 'paraspec'
 end
