@@ -4,6 +4,7 @@ sudo: false
 
 before_install:
   - gem install bundler
+  - gem install paraspec
 
 rvm:
   - 2.5
